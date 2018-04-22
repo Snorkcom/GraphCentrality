@@ -1,4 +1,4 @@
-package sample;
+package sample.Parts;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -11,9 +11,14 @@ import java.util.Scanner;
 // Выбор файла
 public class OpenFile {
 
-    private String textFromFile = ""; // Строка для текста из файла
+    private String path = ""; // Строка пути файла
+    private String textFromFile = ""; // Строка содержимого
 
-    // Геттер
+    // Геттеры
+    public String getPath() {
+        return path;
+    }
+
     public String getTextFromFile() {
         return textFromFile;
     }
@@ -26,18 +31,18 @@ public class OpenFile {
         fileChooser.setTitle("Open Resource File");
 
         // Фильтр .txt
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(".txt, .net", "*.txt", "*.net");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(new Stage());
+
+        path = file.getAbsolutePath();
 
         try {
             FileReader fileReader = new FileReader(file);
             Scanner scan = new Scanner(fileReader);
-            int i = 1;
             // Добавление строк из файла в строку textFromFile
             while (scan.hasNextLine()) {
-                textFromFile += i + " : " + scan.nextLine() + "\n";
-                i++;
+                textFromFile += scan.nextLine() + "\n";
             }
 
             fileReader.close(); // Закрыть поток
@@ -46,8 +51,5 @@ public class OpenFile {
             e.printStackTrace();
         }
     }
-
-
-
 
 }
