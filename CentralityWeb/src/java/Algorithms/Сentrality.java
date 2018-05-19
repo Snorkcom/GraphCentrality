@@ -14,7 +14,7 @@ public class Сentrality {
     Map<Integer, Double> sortMap; // Сортированный HashMap
     int vertexCount; // количество вершин в графе
 
-    int forNormalized; // значение для нормализации значений
+    double forNormalized; // для нормализации значений
 
     // Конструктор (передаем граф)
     public Сentrality(Graph g) {
@@ -34,13 +34,12 @@ public class Сentrality {
         BetweennessCentrality ranker = new BetweennessCentrality(graph);
         
         // Заносим результаты в HashMap
-        for (int i = 1; i < vertexCount + 1; i++) {
+        for (int i = 1; i < vertexCount + 1; i++)
             mapVertexCentr.put(i, ranker.getVertexScore(i) / 2);
-            System.out.println(i + "  :  " + ranker.getVertexScore(i) / 2);
-        }
+         
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = (graph.getVertexCount() - 2) * (graph.getVertexCount() - 1) / 2; // нормализованное значение
+        forNormalized = (vertexCount - 2) * (vertexCount - 1) / 2; // нормализованное значение
 
     }
 
@@ -55,7 +54,7 @@ public class Сentrality {
         }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = (graph.getVertexCount() - 1); // нормализованное значение
+        forNormalized = (vertexCount - 1); // нормализованное значение
 
     }
 
@@ -66,15 +65,16 @@ public class Сentrality {
 
         // Заносим результаты в HashMap
         for (int i = 1; i < vertexCount + 1; i++) {
-            mapVertexCentr.put(i, (double) ranker.getVertexScore(i) / 2);
+            mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
         }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = (graph.getVertexCount() - 1); // нормализованное значение
+        forNormalized = vertexCount - 1; // нормализованное значение
 
     }
 
-    // Вернуть Map<Integer, String>
+    /*_____________________________________________________________________________________________*/
+    // Если нужно вернуть Map<Integer, String>
     public Map<Integer, Double> map() {
         return sortMap;
     }
@@ -95,7 +95,7 @@ public class Сentrality {
         return out;
     }
 
-    // Сортировка от наивысшего ранга
+    // Сортировка HashMap'a от наивысшего ранга
     private static HashMap sortByValues(HashMap map) {
         List list = new LinkedList(map.entrySet());
         // Custom Comparator here
