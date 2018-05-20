@@ -3,6 +3,8 @@ package Algorithms;
 import edu.uci.ics.jung.algorithms.scoring.BetweennessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.ClosenessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.DegreeScorer;
+import edu.uci.ics.jung.algorithms.scoring.EigenvectorCentrality;
+import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.Graph;
 import java.util.*;
 
@@ -22,24 +24,24 @@ public class Сentrality {
             graph = g;
             vertexCount = g.getVertexCount();
             mapVertexCentr = new HashMap<Integer, Double>(vertexCount);
-        } else{
+        } else {
             System.out.println("No Graph ERROR");
         }
     }
 
     // BetweennessCentrality
     public void CalculateBetweennessCentrality() {
-        
+
         // Вычисление BetweennessCentrality
         BetweennessCentrality ranker = new BetweennessCentrality(graph);
-        
+
         // Заносим результаты в HashMap
-        for (int i = 1; i < vertexCount + 1; i++)
+        for (int i = 1; i < vertexCount + 1; i++) {
             mapVertexCentr.put(i, ranker.getVertexScore(i) / 2);
-         
+        }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = (vertexCount - 2) * (vertexCount - 1) / 2; // нормализованное значение
+        forNormalized = vertexCount * vertexCount; // нормализованное значение
 
     }
 
@@ -54,7 +56,7 @@ public class Сentrality {
         }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = (vertexCount - 1); // нормализованное значение
+        forNormalized = 1 / vertexCount; // нормализованное значение
 
     }
 
@@ -72,7 +74,40 @@ public class Сentrality {
         forNormalized = vertexCount - 1; // нормализованное значение
 
     }
+    
+    // EigenvectorCentrality
+    public void CalculateEigenvectorCentrality() {
+        
+        // Вычисление DegreeCentrality
+        EigenvectorCentrality ranker = new EigenvectorCentrality(graph);
+        ranker.setMaxIterations(10000);
+        ranker.evaluate();
+        
+        // Заносим результаты в HashMap
+        for (int i = 1; i < vertexCount + 1; i++) {
+            mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
+        }
 
+        sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
+        forNormalized = vertexCount - 1; // нормализованное значение       
+    }
+
+    // PageRank
+    public void CalculatePageRank() {
+        
+        // Вычисление DegreeCentrality
+        PageRank ranker = new PageRank(graph, 0.15);
+        ranker.setMaxIterations(1000);
+        ranker.evaluate();
+        
+        // Заносим результаты в HashMap
+        for (int i = 1; i < vertexCount + 1; i++) {
+            mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
+        }
+
+        sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
+        forNormalized = vertexCount - 1; // нормализованное значение       
+    }
     /*_____________________________________________________________________________________________*/
     // Если нужно вернуть Map<Integer, String>
     public Map<Integer, Double> map() {

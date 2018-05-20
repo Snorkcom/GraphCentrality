@@ -4,6 +4,7 @@ package Servlets;
 import Algorithms.Сentrality;
 import Other.CreateGraphFromPajek;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.Hypergraph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -74,15 +75,10 @@ public class UploadFile extends HttpServlet {
             String stringRanks = ""; // строка для вывода рангов
             Сentrality centralitySeeker = new Сentrality(g); // объект класса, где лежат алгоритмы
             
-            centralitySeeker.CalculateBetweennessCentrality(); // поиск BetweennessCentrality                       
+            centralitySeeker.CalculatePageRank(); // поиск BetweennessCentrality                       
             stringRanks = centralitySeeker.toString();  // получает строку отсортированного Hashmap'a           
             responseOut.write(stringRanks); // Вывод на html страницу
             
-            responseOut.write("________________________________________________________________ \n");
-            
-            centralitySeeker.CalculateDegreeScorer(); // поиск DegreeCentrality
-            stringRanks = centralitySeeker.toString();
-            responseOut.write(stringRanks); // Вывод на html страницу
             
         } catch (Exception ex) { 
              System.out.println("ОШИБКА");
