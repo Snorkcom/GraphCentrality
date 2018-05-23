@@ -75,7 +75,7 @@ public class UploadFile extends HttpServlet {
             PrintWriter responseOut = response.getWriter();               
             String stringRanks = ""; // строка для вывода рангов
             Centrality centralitySeeker = new Centrality(g); // объект класса, где лежат алгоритмы            
-            centralitySeeker.CalculateHITS(); // поиск BetweennessCentrality                       
+            centralitySeeker.CalculateHITS();// поиск CalculateDegreeScorer                      
             stringRanks = centralitySeeker.toString();  // получает строку отсортированного Hashmap'a           
             responseOut.write(stringRanks); // Вывод на html страницу
             

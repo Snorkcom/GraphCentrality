@@ -1,5 +1,6 @@
 package Algorithms;
 
+import edu.uci.ics.jung.algorithms.importance.MarkovCentrality;
 import edu.uci.ics.jung.algorithms.scoring.BetweennessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.ClosenessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.DegreeScorer;
@@ -7,6 +8,7 @@ import edu.uci.ics.jung.algorithms.scoring.EigenvectorCentrality;
 import edu.uci.ics.jung.algorithms.scoring.HITS;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -112,23 +114,30 @@ public class Centrality {
        
     }
     
+        
+    
     // HITS
+    
     public void CalculateHITS() {
-                
+           
         // Вычисление HITSCentrality
         HITS ranker = new HITS(graph, 0.15);
         
         //ranker.setMaxIterations(1000);
         ranker.evaluate();        
+        String abra ="";
         // Заносим результаты в HashMap
         for (int i = 1; i < vertexCount + 1; i++){
-            System.out.println("ДОШЛИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИ"+ ranker.getVertexScore(i));
-            //mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
+            abra = ranker.getVertexScore(i).toString().replace(',', '.');
+            mapVertexCentr.put(i, Double.parseDouble(abra.substring(3, 9)));
         }
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
         forNormalized = vertexCount - 1; // нормализованное значение  
        
     }
+    
+    
+    
     
     
     /*_____________________________________________________________________________________________*/
