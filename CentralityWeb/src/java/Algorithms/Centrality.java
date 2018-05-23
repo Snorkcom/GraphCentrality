@@ -4,22 +4,25 @@ import edu.uci.ics.jung.algorithms.scoring.BetweennessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.ClosenessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.DegreeScorer;
 import edu.uci.ics.jung.algorithms.scoring.EigenvectorCentrality;
+import edu.uci.ics.jung.algorithms.scoring.HITS;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.Graph;
+import java.text.DecimalFormat;
 import java.util.*;
 
 // Расчет Betweenness Centrality
-public class Сentrality {
+public class Centrality {
 
     Graph graph; // исследуемый граф
     HashMap<Integer, Double> mapVertexCentr; // HashMap для вершин и их центральностей
     Map<Integer, Double> sortMap; // Сортированный HashMap
     int vertexCount; // количество вершин в графе
+    DecimalFormat decDormat;
 
     double forNormalized; // для нормализации значений
 
     // Конструктор (передаем граф)
-    public Сentrality(Graph g) {
+    public Centrality(Graph g) {
         if (g != null) {
             graph = g;
             vertexCount = g.getVertexCount();
@@ -78,9 +81,9 @@ public class Сentrality {
     // EigenvectorCentrality
     public void CalculateEigenvectorCentrality() {
         
-        // Вычисление DegreeCentrality
+        // Вычисление EigenvectorCentrality
         EigenvectorCentrality ranker = new EigenvectorCentrality(graph);
-        ranker.setMaxIterations(10000);
+        //ranker.setMaxIterations(10000);
         ranker.evaluate();
         
         // Заносим результаты в HashMap
@@ -94,20 +97,40 @@ public class Сentrality {
 
     // PageRank
     public void CalculatePageRank() {
-        
-        // Вычисление DegreeCentrality
+                
+        // Вычисление PageRankCentrality
         PageRank ranker = new PageRank(graph, 0.15);
         ranker.setMaxIterations(1000);
         ranker.evaluate();
         
         // Заносим результаты в HashMap
-        for (int i = 1; i < vertexCount + 1; i++) {
+        for (int i = 1; i < vertexCount + 1; i++)
             mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
-        }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = vertexCount - 1; // нормализованное значение       
+        forNormalized = vertexCount - 1; // нормализованное значение  
+       
     }
+    
+    // HITS
+    public void CalculateHITS() {
+                
+        // Вычисление HITSCentrality
+        HITS ranker = new HITS(graph, 0.15);
+        
+        //ranker.setMaxIterations(1000);
+        ranker.evaluate();        
+        // Заносим результаты в HashMap
+        for (int i = 1; i < vertexCount + 1; i++){
+            System.out.println("ДОШЛИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИИ"+ ranker.getVertexScore(i));
+            //mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
+        }
+        sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
+        forNormalized = vertexCount - 1; // нормализованное значение  
+       
+    }
+    
+    
     /*_____________________________________________________________________________________________*/
     // Если нужно вернуть Map<Integer, String>
     public Map<Integer, Double> map() {
@@ -117,14 +140,15 @@ public class Сentrality {
     // Переопределение ToString()
     @Override
     public String toString() {
-
-        Set set2 = sortMap.entrySet();
-        Iterator iterator2 = set2.iterator();
+        decDormat = new DecimalFormat("#0.0000000"); // Формат дробных значений
+        
+        Set set2 = sortMap.entrySet(); 
+        Iterator iterator2 = set2.iterator(); 
         String out = "";
         int i = 1;
         while (iterator2.hasNext()) {
             Map.Entry me2 = (Map.Entry) iterator2.next();
-            out += "Rank: " + i + " Vertex id: " + me2.getKey() + " Value: " + me2.getValue() + " NormValue: " + (Double) me2.getValue() / forNormalized + "\n";
+            out += "Rank: " + i + " Vertex id: " + me2.getKey() + " Value: " + decDormat.format(me2.getValue()) + " NormValue: " + decDormat.format((Double) me2.getValue() / forNormalized) + "\n";
             i++;
         }
         return out;

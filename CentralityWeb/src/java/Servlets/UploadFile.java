@@ -1,10 +1,9 @@
 package Servlets;
 
 
-import Algorithms.Сentrality;
+import Algorithms.Centrality;
 import Other.CreateGraphFromPajek;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.Hypergraph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -67,23 +66,19 @@ public class UploadFile extends HttpServlet {
         }
 
        
-
+        System.out.println("----------Отладка---------");
+        
         Graph g = new CreateGraphFromPajek().LoadPajek("C:\\Users\\herob\\Desktop\\network.net");
-
-         try (PrintWriter responseOut = response.getWriter()) {
-            
+        
+        
+        
+            PrintWriter responseOut = response.getWriter();               
             String stringRanks = ""; // строка для вывода рангов
-            Сentrality centralitySeeker = new Сentrality(g); // объект класса, где лежат алгоритмы
-            
-            centralitySeeker.CalculatePageRank(); // поиск BetweennessCentrality                       
+            Centrality centralitySeeker = new Centrality(g); // объект класса, где лежат алгоритмы            
+            centralitySeeker.CalculateHITS(); // поиск BetweennessCentrality                       
             stringRanks = centralitySeeker.toString();  // получает строку отсортированного Hashmap'a           
             responseOut.write(stringRanks); // Вывод на html страницу
             
-            
-        } catch (Exception ex) { 
-             System.out.println("ОШИБКА");
-           ex.printStackTrace();            
-        }
 
     }
 

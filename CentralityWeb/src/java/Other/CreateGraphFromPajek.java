@@ -10,12 +10,12 @@ import java.io.IOException;
 public class CreateGraphFromPajek {
 
     // фабрика для создания узлов
-    static Factory<Integer> vertexFactory = new Factory<Integer>() {
+    Factory<Integer> vertexFactory = new Factory<Integer>() {
         int i=1;
         public Integer create() {return  new Integer(i++);}
     };
     // фабрика для создания ребер
-    static Factory<Integer> edgeFactory = new Factory<Integer>() {
+    Factory<Integer> edgeFactory = new Factory<Integer>() {
         int i=1;
         public Integer create() {return  new Integer(i++);}
     };
@@ -27,10 +27,10 @@ public class CreateGraphFromPajek {
 
     // Загрузка графа из файла Pajek
     public Graph LoadPajek(String fileAddress) {
-        try {
+        try {            
             pajekNetReader.load(fileAddress, graph);
         } catch (IOException e) {
-            System.out.println("CreateGraphFromPajek.LoadPajek() error __________________________");
+            System.out.println("CreateGraphFromPajek.LoadPajek() error");
             e.printStackTrace();
         }
 
