@@ -1,6 +1,6 @@
 package Algorithms;
 
-import edu.uci.ics.jung.algorithms.importance.MarkovCentrality;
+
 import edu.uci.ics.jung.algorithms.scoring.BetweennessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.ClosenessCentrality;
 import edu.uci.ics.jung.algorithms.scoring.DegreeScorer;
@@ -8,7 +8,6 @@ import edu.uci.ics.jung.algorithms.scoring.EigenvectorCentrality;
 import edu.uci.ics.jung.algorithms.scoring.HITS;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -112,12 +111,9 @@ public class Centrality {
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
         forNormalized = vertexCount - 1; // нормализованное значение  
        
-    }
+    } 
     
-        
-    
-    // HITS
-    
+    // HITS    
     public void CalculateHITS() {
            
         // Вычисление HITSCentrality

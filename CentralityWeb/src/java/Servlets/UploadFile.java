@@ -3,6 +3,7 @@ package Servlets;
 
 import Algorithms.Centrality;
 import Other.CreateGraphFromPajek;
+import Other.GraphToJson;
 import edu.uci.ics.jung.graph.Graph;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,18 +67,17 @@ public class UploadFile extends HttpServlet {
         }
 
        
-        System.out.println("----------Отладка---------");
         
-        Graph g = new CreateGraphFromPajek().LoadPajek("C:\\Users\\herob\\Desktop\\network.net");
+        //Graph g = new CreateGraphFromPajek().LoadPajek("C:\\Users\\herob\\Desktop\\network.net");
         
+        GraphToJson a = new GraphToJson();
         
-        
-            PrintWriter responseOut = response.getWriter();               
+            /*PrintWriter responseOut = response.getWriter();               
             String stringRanks = ""; // строка для вывода рангов
             Centrality centralitySeeker = new Centrality(g); // объект класса, где лежат алгоритмы            
-            centralitySeeker.CalculateHITS();// поиск CalculateDegreeScorer                      
+            centralitySeeker.CalculatePageRank();// поиск CalculateDegreeScorer                      
             stringRanks = centralitySeeker.toString();  // получает строку отсортированного Hashmap'a           
-            responseOut.write(stringRanks); // Вывод на html страницу
+            responseOut.write(stringRanks); // Вывод на html страницу*/
             
 
     }
