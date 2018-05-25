@@ -11,8 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -21,67 +22,50 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 public class GraphToJson {
 
     String jsonGraph = "";
-    int numberOfVertices;
-    File file = null;
-    BufferedReader br;
-    
+    int numberOfVertices; // количество вершин графа(в .net файле на 1 строке: "*Vertices 1419")
+    File file = null; // для открытия файла
+    BufferedReader br; // для чтения файла
+
     public GraphToJson() throws IOException {
 
-        String[] formatVertString;
-        ArrayList<String> formatEdgeString;
-        
+        ArrayList<String[]> formatVertString = null; // Лист вершин графа <String массива>: [1] номер узла, [2] название, [1] др. информация
+        ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] номер узла, [2] название, [1] др. информация
+        String[] splitStrings; // массив разделенных строк
+
         try {
 
             file = new File("C:\\Users\\herob\\Desktop\\network.net");
 
             br = new BufferedReader(new FileReader(file));
-            
+
             // парсинг числа узлов в строке (*Vertices 132)
             String[] splitted1 = br.readLine().split(" ");
-            numberOfVertices = Integer.parseInt(splitted1[1]);             
-            System.out.println("Graph has "+numberOfVertices+" vertices");
-            
-            formatVertString = new String[numberOfVertices];
-            
-            // Чтение вершин
-            for(int i = 0; i<numberOfVertices;i++)
-            {
-                formatVertString[i] = br.readLine(); //.split(" ")
+            numberOfVertices = Integer.parseInt(splitted1[1]);
+            System.out.println("Graph has " + numberOfVertices + " vertices");
+
+            // Часть I: Парсинг вершин
+            // Пример строки для парсинга: 9 "Obesity" 47.382732 -109.748215 0.0
+            formatVertString = new ArrayList<String[]>();
+
+            for (int i = 0; i < numberOfVertices; i++) {
+                splitStrings = br.readLine().split("\"", 3); // разделения по ковычкам "
+                splitStrings[0] = splitStrings[0].replace(" ", ""); // убирает пробел в 1 элементе
+                splitStrings[2] = splitStrings[2].substring(1); // убирает начальный пробел
+                formatVertString.add(splitStrings);
             }
+
             
+            // Часть II: Парсинг ребер
+            // Пример строки для парсинга: 2 4 1.0
             br.readLine(); // Пропустить строку "*Edges"
-            
+            formatEdgeString = new ArrayList<String[]>();
+
             String str;
-            formatEdgeString = new ArrayList<String>();
-            while((str = br.readLine())!=null)
-            {
-                formatEdgeString.add(str);
+            while ((str = br.readLine()) != null) {
+                splitStrings = str.split(" ", 3); // разделения по пробелам                               
+                formatEdgeString.add(splitStrings);
             }
-            
-            /*System.out.println("I) formatVertString вывод");
-            for(int i=0; i<formatVertString.length;i++)
-                System.out.println(formatVertString[i]);
-            System.out.println("II) formatEdgeString вывод");
-            for(int i=0; i<formatEdgeString.size();i++)
-                System.out.println(formatEdgeString.get(i));
-            */
-            
-            
-        jsonGraph = "{'nodes':{";
-        String[] blabla = new String[2];
-        for(int i=0; i<formatVertString.length;i++)
-        {
-            blabla = formatVertString[i].split(" ", 3);
-            jsonGraph += "'"+blabla[0]+":{'color':'red', 'shape':'rect', 'label':'"+blabla[1]+"', 'alpha':1, 'link':'http://www.temis.com/fr'},";         
-        }
-            
-        jsonGraph += 
-        // 'edges':{'temis':{'colombia':{'directed':'true', 'color':'#FFA500', 'name':'Headquarter', 'weight':4}, 'paris'    
-            
-            
-            
-            
-           
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,12 +74,21 @@ public class GraphToJson {
             br.close();
         }
 
-        //String[] strings = formatEdgeString.split("\n");
+        System.out.println(toJson(formatVertString)); // json строка для вершин
+        System.out.println(toJson(formatEdgeString)); // json строка для вершин
         
-            
-            
-        //
-        
-
     }
+
+    // Функция преобразования в JSON строку
+    public static String toJson(ArrayList<String[]> arlist) {
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(arlist);
+        } catch (IOException ex) {
+            Logger.getLogger(GraphToJson.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }
