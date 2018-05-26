@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Upload</title>
+        <!-- Блиблиотеки -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="../lib/vivagraph.min.js"></script>
+        
+        <!-- service -->        
+        <script src="../service/getJSONGraphService.js"></script>
+        <!-- controllers --> 
+        <script src="../controllers/createVivaGraph.js"></script>
+        
+        <style type='text/css'>
+            body, svg, #graphContainer {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                margin: 0;
+            }
+            .label {
+                position: absolute;
+                top: 10px;
+                color: white;
+                font-size: 18px;
+                left: 10px;
+                font-family: Verdana;
+            }
+        </style>
+        
+    </head>
+    <body>
+
+        <p>GRAPH HTML</p>
+
+        <script>
+            $(window).load(function () {
+
+                var controller = new createVivaGraph();  // создание объекта createVivaGraph
+                controller.createGraphFromJSON(); //вызов его функции createGraphFromJSON()
+            });
+
+        </script>
+    </body>
+    
+</html>

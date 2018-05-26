@@ -25,16 +25,17 @@ public class GraphToJson {
     int numberOfVertices; // количество вершин графа(в .net файле на 1 строке: "*Vertices 1419")
     File file = null; // для открытия файла
     BufferedReader br; // для чтения файла
+    ArrayList<String[]> formatVertString = null; // Лист вершин графа <String массива>: [1] номер узла, [2] название, [1] др. информация
+    ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] исход узел, [2] конечн узел, [1] др. информация
 
+    // Конструктор открывает сохраненный файл и парсит его на formatVertString и formatEdgeString 
     public GraphToJson() throws IOException {
 
-        ArrayList<String[]> formatVertString = null; // Лист вершин графа <String массива>: [1] номер узла, [2] название, [1] др. информация
-        ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] номер узла, [2] название, [1] др. информация
         String[] splitStrings; // массив разделенных строк
 
         try {
 
-            file = new File("C:\\Users\\herob\\Desktop\\network.net");
+            file = new File("network.net");
 
             br = new BufferedReader(new FileReader(file));
 
@@ -54,7 +55,6 @@ public class GraphToJson {
                 formatVertString.add(splitStrings);
             }
 
-            
             // Часть II: Парсинг ребер
             // Пример строки для парсинга: 2 4 1.0
             br.readLine(); // Пропустить строку "*Edges"
@@ -74,12 +74,19 @@ public class GraphToJson {
             br.close();
         }
 
-        System.out.println(toJson(formatVertString)); // json строка для вершин
-        System.out.println(toJson(formatEdgeString)); // json строка для вершин
-        
     }
 
-    // Функция преобразования в JSON строку
+    // Возвращает json строку вершин
+    public String VerticesJson() {
+        return toJson(formatVertString);
+    }
+
+    // Возвращает json строку ребер
+    public String EdgesJson() {
+        return toJson(formatEdgeString);
+    }
+
+    // Функция преобразования ArrayList<String[]> в JSON строку
     public static String toJson(ArrayList<String[]> arlist) {
 
         try {

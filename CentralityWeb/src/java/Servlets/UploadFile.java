@@ -45,7 +45,8 @@ public class UploadFile extends HttpServlet {
 
         try {
 
-            file = new File("C:\\Users\\herob\\Desktop\\network.net");
+            file = new File("network.net");
+            System.out.println("Путь сохраненного файла на сервере: "+ file.getAbsolutePath().toString());
 
             in = new InputStreamReader(part.getInputStream());
             out = new FileOutputStream(file);
@@ -67,13 +68,21 @@ public class UploadFile extends HttpServlet {
         }
 
        
+        // Загрузить граф и .net файла
+        Graph g = new CreateGraphFromPajek().LoadPajek("network.net");
         
-        //Graph g = new CreateGraphFromPajek().LoadPajek("C:\\Users\\herob\\Desktop\\network.net");
+        response.setContentType("text/html;charset=UTF-8"); // кодировка символов
+        try (PrintWriter responseOut = response.getWriter()) {
+             responseOut.write("Граф успешно загружен, перенаправляю на страницу анализа...");
+             responseOut.write("<script>"
+                     + "function func(){document.location.href = '/CentralityWeb/pages/Graph.html';}\n"
+                     + "setTimeout(func, 2000);"
+                     + "</script>");
+        }
         
-        GraphToJson a = new GraphToJson();
-        
-            /*PrintWriter responseOut = response.getWriter();               
-            String stringRanks = ""; // строка для вывода рангов
+         //
+           
+            /*String stringRanks = ""; // строка для вывода рангов
             Centrality centralitySeeker = new Centrality(g); // объект класса, где лежат алгоритмы            
             centralitySeeker.CalculatePageRank();// поиск CalculateDegreeScorer                      
             stringRanks = centralitySeeker.toString();  // получает строку отсортированного Hashmap'a           
