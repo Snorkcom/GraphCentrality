@@ -1,6 +1,7 @@
 package Servlets;
 
-import Other.GraphToJson;
+import Other.GraphParser;
+import Json.JsonMappers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -28,9 +29,10 @@ public class getJsonGraph extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
                
         try (PrintWriter out = response.getWriter()) {
-          GraphToJson graphToJson = new GraphToJson();
+          GraphParser graphParser = new GraphParser();
           
-          String graph = graphToJson.VerticesJson()+"|"+graphToJson.EdgesJson();
+          //rankList);
+          String graph =  JsonMappers.toJson(graphParser.VerticesJson())+"|"+JsonMappers.toJson(graphParser.EdgesJson());
             
           out.println(graph);
         }

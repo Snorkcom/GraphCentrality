@@ -15,8 +15,17 @@
         <script src="../resources/lib/vivagraph.min.js"></script>        
         <!-- service -->        
         <script src="../service/getJSONGraphService.js"></script>
+        <script src="../service/getJSONRanks.js"></script>
         <!-- controllers --> 
         <script src="../controllers/createVivaGraph.js"></script>
+        <script src="../controllers/centralityController.js"></script>
+        <script>
+            function calculateCentrallity(number)
+            {
+                var controller = new centralityController();
+                controller.calculateCentrality(number);
+            }
+        </script>
 
     </head>
     <body>	
@@ -39,7 +48,7 @@
         <script>
             $(window).on('load', function () {
                 var controller = new createVivaGraph();  // создание объекта createVivaGraph
-                controller.createGraphFromJSON(); //вызов его функции createGraphFromJSON()                
+                controller.createGraphFromJSON(); //вызов его функции createGraphFromJSON()                   
             });
         </script>
 

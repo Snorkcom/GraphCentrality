@@ -11,15 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
+
 
 /**
  *
  * @author Morris
  */
-public class GraphToJson {
+public class GraphParser {
 
     String jsonGraph = "";
     int numberOfVertices; // количество вершин графа(в .net файле на 1 строке: "*Vertices 1419")
@@ -29,7 +27,7 @@ public class GraphToJson {
     ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] исход узел, [2] конечн узел, [1] др. информация
 
     // Конструктор открывает сохраненный файл и парсит его на formatVertString и formatEdgeString 
-    public GraphToJson() throws IOException {
+    public GraphParser() throws IOException {
 
         String[] splitStrings; // массив разделенных строк
 
@@ -76,26 +74,14 @@ public class GraphToJson {
 
     }
 
-    // Возвращает json строку вершин
-    public String VerticesJson() {
-        return toJson(formatVertString);
+    // Возвращает ArrayList<String[]> вершин
+    public ArrayList<String[]> VerticesJson() {
+        return formatVertString;
     }
 
-    // Возвращает json строку ребер
-    public String EdgesJson() {
-        return toJson(formatEdgeString);
-    }
-
-    // Функция преобразования ArrayList<String[]> в JSON строку
-    public static String toJson(ArrayList<String[]> arlist) {
-
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(arlist);
-        } catch (IOException ex) {
-            Logger.getLogger(GraphToJson.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    // Возвращает ArrayList<String[]> ребер
+    public ArrayList<String[]> EdgesJson() {
+        return formatEdgeString;
     }
 
 }

@@ -66,8 +66,7 @@ class createVivaGraph {
                 });
 
 
-        renderer.run();
-        $('#1').attr('fill', 'blue');
+        renderer.run();        
     }
 
     //Создание контейнера для svg

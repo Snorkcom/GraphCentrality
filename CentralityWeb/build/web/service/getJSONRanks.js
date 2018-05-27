@@ -1,10 +1,10 @@
-class getJSONGraphService {
+class getJSONRanksService {
 
     
-    getJSONGraph() {
+    getJSONRanks(x) {
 
         var request = new XMLHttpRequest();
-        request.open('GET', '/CentralityWeb/getJsonGraph', false); 
+        request.open('GET', '/CentralityWeb/getRanks?id='+x, false); 
         request.send(); 
 
         
@@ -14,7 +14,7 @@ class getJSONGraphService {
             return null;
         } else
         {
-            var response = request.responseText.split("|");
+            var response = request.responseText;
   
             return response; 
         }

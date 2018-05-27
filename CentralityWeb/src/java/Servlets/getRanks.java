@@ -1,6 +1,7 @@
 package Servlets;
 
 import Algorithms.Centrality;
+import Json.JsonMappers;
 import Other.CreateGraphFromPajek;
 import edu.uci.ics.jung.graph.Graph;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class getRanks extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("id")); // получает гет параметр id
-
+        
         try (PrintWriter out = response.getWriter()) {
             // Загрузить граф из .net файла
             Graph g = new CreateGraphFromPajek().LoadPajek("network.net");
@@ -62,13 +63,16 @@ public class getRanks extends HttpServlet {
                     // HITS
                     centralitySeeker.CalculateHITS();
                     break;
-
                 default:
-                    return;
+                    // В других случаях
+                    centralitySeeker.CalculateDegreeScorer();
+                    break;
             }
             
-            String stringRanks = centralitySeeker.toString();
-            out.write(stringRanks);
+            // Выводит массив с элементами типа ["1","1","0.2647058823529412"], где
+            // 1 значение - ранг, 2 - id, 3 - значение
+            out.write(JsonMappers.toJson(centralitySeeker.getRanks()));
+            
         }
     }
 

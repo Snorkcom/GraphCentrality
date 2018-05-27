@@ -11,6 +11,8 @@ import edu.uci.ics.jung.graph.Graph;
 import java.text.DecimalFormat;
 import java.util.*;
 
+
+
 // Расчет Betweenness Centrality
 public class Centrality {
 
@@ -93,7 +95,7 @@ public class Centrality {
         }
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = vertexCount - 1; // нормализованное значение       
+        forNormalized = 1; // нормализованное значение       
     }
 
     // PageRank
@@ -109,7 +111,7 @@ public class Centrality {
             mapVertexCentr.put(i, (double) ranker.getVertexScore(i));
 
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = vertexCount - 1; // нормализованное значение  
+        forNormalized = 1; // нормализованное значение  
        
     } 
     
@@ -128,35 +130,28 @@ public class Centrality {
             mapVertexCentr.put(i, Double.parseDouble(abra.substring(3, 9)));
         }
         sortMap = sortByValues(mapVertexCentr); // сортируем по убыванию
-        forNormalized = vertexCount - 1; // нормализованное значение  
+        forNormalized = 1; // нормализованное значение  
        
     }
     
     
-    
-    
-    
     /*_____________________________________________________________________________________________*/
-    // Если нужно вернуть Map<Integer, String>
-    public Map<Integer, Double> map() {
-        return sortMap;
-    }
+    
 
-    // Переопределение ToString()
-    @Override
-    public String toString() {
-        decDormat = new DecimalFormat("#0.0000000"); // Формат дробных значений
-        
+    // Возвращает ArrayList<String[]> с рангами вершин для json маппера
+    public ArrayList<String[]> getRanks() {
+        ArrayList<String[]> ranksList = new ArrayList<String[]>();      
+                
         Set set2 = sortMap.entrySet(); 
         Iterator iterator2 = set2.iterator(); 
-        String out = "";
         int i = 1;
         while (iterator2.hasNext()) {
             Map.Entry me2 = (Map.Entry) iterator2.next();
-            out += "Rank: " + i + " Vertex id: " + me2.getKey() + " Value: " + decDormat.format(me2.getValue()) + " NormValue: " + decDormat.format((Double) me2.getValue() / forNormalized) + "\n";
+            ranksList.add(new String[]{i+"",me2.getKey()+"",me2.getValue()+""});            
             i++;
         }
-        return out;
+        
+        return ranksList;
     }
 
     // Сортировка HashMap'a от наивысшего ранга
