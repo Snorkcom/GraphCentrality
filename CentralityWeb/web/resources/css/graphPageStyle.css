@@ -1,0 +1,19 @@
+.graph-container {
+
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+    border: 1px solid gray;
+    padding: auto;
+}
+svg{
+    height: 100%;
+    width: 100%;
+    position: inherit;
+    overflow: hidden;
+    margin: 0px;
+}
+
+body {
+    overflow: hidden;
+}

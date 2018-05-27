@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="ru-RU">
     <head>
-        <title>Upload</title>
+        <meta charset="utf-8">        
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <title>Graph</title>
+        <link rel="stylesheet" href="../resources/css/graphPageStyle.css">
+        <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+        <style type='text/css'>
+
+        </style> 
         <!-- Блиблиотеки -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <script src="../lib/vivagraph.min.js"></script>
-        
+        <script type="text/javascript" src="../resources/js/jquery-3.3.1.min.js"></script>
+        <script src="../resources/lib/vivagraph.min.js"></script>        
         <!-- service -->        
         <script src="../service/getJSONGraphService.js"></script>
         <!-- controllers --> 
         <script src="../controllers/createVivaGraph.js"></script>
-        
-        <style type='text/css'>
-            body, svg, #graphContainer {
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                margin: 0;
-            }
-            .label {
-                position: absolute;
-                top: 10px;
-                color: white;
-                font-size: 18px;
-                left: 10px;
-                font-family: Verdana;
-            }
-        </style>
-        
+
     </head>
-    <body>
+    <body>	
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" onclick='calculateCentrallity(1)'>Betweenness Centrality</button>
+                <button type="button" class="btn btn-primary" onclick='calculateCentrallity(2)'>Closeness Centrality</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-success" onclick='calculateCentrallity(3)'>Degree Centrality</button>
+                <button type="button" class="btn btn-success" onclick='calculateCentrallity(4)'>Eigenvector Centrality</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-danger" onclick='calculateCentrallity(5)'>PageRank</button>
+                <button type="button" class="btn btn-danger" onclick='calculateCentrallity(6)'>HITS</button>
+            </div>
+        </div>          
 
-        <p>GRAPH HTML</p>
-
+        <!-- ------------------------------------------------------------------------- -->
         <script>
-            $(window).load(function () {
-
+            $(window).on('load', function () {
                 var controller = new createVivaGraph();  // создание объекта createVivaGraph
-                controller.createGraphFromJSON(); //вызов его функции createGraphFromJSON()
+                controller.createGraphFromJSON(); //вызов его функции createGraphFromJSON()                
             });
-
         </script>
+
+        <script src="../resources/js/bootstrap.min.js"></script>
     </body>
-    
 </html>
+
+

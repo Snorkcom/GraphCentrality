@@ -30,8 +30,19 @@ class createVivaGraph {
             graph.addLink(value[0], value[1]);
         });
 
+        // Слой для графа
+        var layout = Viva.Graph.Layout.forceDirected(graph, {
+            springLength: 100,
+            springCoeff: 0.0008,
+            dragCoeff: 0.01,
+            gravity: -1.2,
+        });
+
+
         var renderer = Viva.Graph.View.renderer(graph, {
-            graphics: graphics
+            layout: layout,
+            graphics: graphics,
+            container: this.createContainer()
         });
 
 
@@ -42,7 +53,8 @@ class createVivaGraph {
             var img = Viva.Graph.svg('rect')
                     .attr('width', nodeSize / 2)
                     .attr('height', nodeSize / 2)
-                    .attr('fill', 'red');
+                    .attr('fill', 'red')
+                    .attr('id', node.id);
 
             ui.append(img);
             ui.append(svgText);
@@ -54,15 +66,17 @@ class createVivaGraph {
                 });
 
 
-
-
-
         renderer.run();
+        $('#1').attr('fill', 'blue');
     }
 
-    // var element = document.getElementById("biography"); // находим на странице элемент с id = biography
-    // element.innerHTML = res; // вставка туда строки res
-
+    //Создание контейнера для svg
+    createContainer() {
+        var container = document.createElement('div');
+        container.className = 'graph-container';
+        document.body.appendChild(container);
+        return container;
+    }
 
 }
 

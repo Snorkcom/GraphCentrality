@@ -1,25 +1,22 @@
 package Servlets;
 
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import Algorithms.Centrality;
+import Other.CreateGraphFromPajek;
+import edu.uci.ics.jung.graph.Graph;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Morris
  */
-@WebServlet(name = "UploadFile", urlPatterns = {"/UploadFile"})
-public class UploadFile extends HttpServlet {
+@WebServlet(name = "getRanks", urlPatterns = {"/getRanks"})
+public class getRanks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,51 +30,49 @@ public class UploadFile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Part part = request.getPart("file");
+        response.setContentType("text/html;charset=UTF-8");
+        int id = Integer.parseInt(request.getParameter("id")); // получает гет параметр id
 
-        File file = null;
-        InputStreamReader in = null;
-        FileOutputStream out = null;
+        try (PrintWriter out = response.getWriter()) {
+            // Загрузить граф из .net файла
+            Graph g = new CreateGraphFromPajek().LoadPajek("network.net");
+            Centrality centralitySeeker = new Centrality(g);
+            switch (id) {
+                case 1:
+                    // BetweennessCentrality
+                     centralitySeeker.CalculateBetweennessCentrality();
+                    break;
+                case 2:
+                    // ClosenessCentrality
+                     centralitySeeker.CalculateClosenessCentrality();
+                    break;
+                case 3:
+                    // DegreeCentrality
+                     centralitySeeker.CalculateDegreeScorer();
+                    break;
+                case 4:
+                    // EigenvectorCentrality
+                    centralitySeeker.CalculateEigenvectorCentrality();
+                    break;
+                case 5:
+                    // PageRank
+                    centralitySeeker.CalculatePageRank();
+                    break;
+                case 6:
+                    // HITS
+                    centralitySeeker.CalculateHITS();
+                    break;
 
-        try {
-
-            file = new File("network.net");
-            System.out.println("Путь сохраненного файла на сервере: "+ file.getAbsolutePath().toString());
-
-            in = new InputStreamReader(part.getInputStream());
-            out = new FileOutputStream(file);
-
-            int c;
-            while ((c = in.read()) != -1) {
-                out.write((char) c);
+                default:
+                    return;
             }
-
-            // путь до файла: System.out.println(myFile.getAbsolutePath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            in.close();
-            out.flush();
-            out.close();
+            
+            String stringRanks = centralitySeeker.toString();
+            out.write(stringRanks);
         }
-
-       
-        
-        
-        response.setContentType("text/html;charset=UTF-8"); // кодировка символов
-        try (PrintWriter responseOut = response.getWriter()) {
-             responseOut.write("Граф успешно загружен, перенаправляю на страницу анализа...");
-             responseOut.write("<script>"
-                     + "function func(){document.location.href = '/CentralityWeb/pages/Graph.html';}\n"
-                     + "setTimeout(func, 2000);"
-                     + "</script>");
-        }
-        
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -113,7 +108,7 @@ public class UploadFile extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "LoadFile";
+        return "Short description";
     }// </editor-fold>
 
 }
