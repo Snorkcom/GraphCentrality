@@ -5,13 +5,14 @@
         <meta charset="utf-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <title>Graph</title>
+
+        <!-- Стили -->
         <link rel="stylesheet" href="../resources/css/graphPageStyle.css">
         <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-        <style type='text/css'>
 
-        </style> 
         <!-- Блиблиотеки -->
         <script type="text/javascript" src="../resources/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
         <script src="../resources/lib/vivagraph.min.js"></script>        
         <!-- service -->        
         <script src="../service/getJSONGraphService.js"></script>
@@ -20,30 +21,85 @@
         <script src="../controllers/createVivaGraph.js"></script>
         <script src="../controllers/centralityController.js"></script>
         <script>
-            function calculateCentrallity(number)
+             var algr=3;
+            function calculateCentrallity(alg)
+            {
+                var n;
+               
+
+                if ($("#input").val().length == 0)
+                    n = 3;
+                else
+                    n = $("#input").val();
+
+                var controller = new centralityController();
+                controller.calculateCentrality(alg, n);
+                algr=alg;
+            }
+            function refresh()
             {
                 var controller = new centralityController();
-                controller.calculateCentrality(number);
+                controller.refreshVertices(24);                
             }
+            function getRanks()
+            {
+                var controller = new centralityController();
+                controller.getRanksToString(algr);
+            }
+
+
         </script>
 
     </head>
-    <body>	
-        <div class="row">
-            <div class="col-sm-4">
-                <button type="button" class="btn btn-primary" onclick='calculateCentrallity(1)'>Betweenness Centrality</button>
-                <button type="button" class="btn btn-primary" onclick='calculateCentrallity(2)'>Closeness Centrality</button>
+    <body>
+        <div class="container-fluid topPanel" >
+            <div class="row" align="center">
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" onclick='calculateCentrallity(1)'>Betweenness Centrality</button>                
+                </div>
+                <div class="col-sm-2">                    
+                    <button type="button" class="btn btn-primary" onclick='calculateCentrallity(2)'>Closeness Centrality</button>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-success" onclick='calculateCentrallity(3)'>Degree Centrality</button>
+                </div>
+                <div class="col-sm-2">                    
+                    <button type="button" class="btn btn-success" onclick='calculateCentrallity(4)'>Eigenvector Centrality</button>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-danger" onclick='calculateCentrallity(5)'>PageRank</button>                   
+                </div>
+                <div class="col-sm-2">                    
+                    <button type="button" class="btn btn-danger" onclick='calculateCentrallity(6)'>HITS</button>
+                </div>                
             </div>
-            <div class="col-sm-4">
-                <button type="button" class="btn btn-success" onclick='calculateCentrallity(3)'>Degree Centrality</button>
-                <button type="button" class="btn btn-success" onclick='calculateCentrallity(4)'>Eigenvector Centrality</button>
-            </div>
-            <div class="col-sm-4">
-                <button type="button" class="btn btn-danger" onclick='calculateCentrallity(5)'>PageRank</button>
-                <button type="button" class="btn btn-danger" onclick='calculateCentrallity(6)'>HITS</button>
-            </div>
-        </div>          
+            <div class="row" align="center">                
+                <div class="col-sm-4"> 
+                    <button class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal" data-target="#myModal" onclick="getRanks()">Получить список</button>
+                    <div id="myModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">                                
+                                <h4 id ="nameOfAlg" class="modal-title">Алгоритм</h4>                                
+                                <div id ="ranks" class="modal-body">Ранги</div>
+                                <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">                    
+                    <input id="input" class="form-control form-control-lg" placeholder="3" type="text" data-toggle="tooltip" data-placement="bottom" title="Введите количество узлов, которые нужно отобразить">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick='refresh()' >Очистить граф</button>
+                </div>                
+                <div class="col-sm-4">
+                    <a href="/CentralityWeb" class="btn btn-secondary btn-lg btn-block">Загрузить другой граф</a>
+                </div>                
+            </div>            
 
+
+            <div class="row" id="graph">  </div>
+        </div>
         <!-- ------------------------------------------------------------------------- -->
         <script>
             $(window).on('load', function () {

@@ -5,6 +5,7 @@
     margin: 0 auto;
     border: 1px solid gray;
     padding: auto;
+    background-color: white;
 }
 svg{
     height: 100%;
@@ -16,4 +17,12 @@ svg{
 
 body {
     overflow: hidden;
+    background-image: url(../images/bgGraph.jpg);
+    background-size: cover;
+}
+.topPanel{
+    margin-top:10px;
+}
+.row{
+    margin-bottom: 10px;
 }

@@ -14,6 +14,11 @@ import java.util.*;
 
 
 // Расчет Betweenness Centrality
+
+/**
+ *
+ * @author Morris
+ */
 public class Centrality {
 
     Graph graph; // исследуемый граф
@@ -25,6 +30,11 @@ public class Centrality {
     double forNormalized; // для нормализации значений
 
     // Конструктор (передаем граф)
+
+    /**
+     *
+     * @param g
+     */
     public Centrality(Graph g) {
         if (g != null) {
             graph = g;
@@ -36,6 +46,10 @@ public class Centrality {
     }
 
     // BetweennessCentrality
+
+    /**
+     *
+     */
     public void CalculateBetweennessCentrality() {
 
         // Вычисление BetweennessCentrality
@@ -52,6 +66,10 @@ public class Centrality {
     }
 
     // ClosenessCentrality
+
+    /**
+     *
+     */
     public void CalculateClosenessCentrality() {
         // Вычисление ClosenessCentrality
         ClosenessCentrality ranker = new ClosenessCentrality(graph);
@@ -67,6 +85,10 @@ public class Centrality {
     }
 
     // DegreeCentrality
+
+    /**
+     *
+     */
     public void CalculateDegreeScorer() {
         // Вычисление DegreeCentrality
         DegreeScorer ranker = new DegreeScorer(graph);
@@ -82,6 +104,10 @@ public class Centrality {
     }
     
     // EigenvectorCentrality
+
+    /**
+     *
+     */
     public void CalculateEigenvectorCentrality() {
         
         // Вычисление EigenvectorCentrality
@@ -99,6 +125,10 @@ public class Centrality {
     }
 
     // PageRank
+
+    /**
+     *
+     */
     public void CalculatePageRank() {
                 
         // Вычисление PageRankCentrality
@@ -116,6 +146,10 @@ public class Centrality {
     } 
     
     // HITS    
+
+    /**
+     *
+     */
     public void CalculateHITS() {
            
         // Вычисление HITSCentrality
@@ -139,6 +173,11 @@ public class Centrality {
     
 
     // Возвращает ArrayList<String[]> с рангами вершин для json маппера
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<String[]> getRanks() {
         ArrayList<String[]> ranksList = new ArrayList<String[]>();      
                 

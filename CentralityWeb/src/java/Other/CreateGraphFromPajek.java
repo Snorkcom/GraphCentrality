@@ -7,6 +7,10 @@ import org.apache.commons.collections15.Factory;
 
 import java.io.IOException;
 
+/**
+ *
+ * @author Morris
+ */
 public class CreateGraphFromPajek {
 
     // фабрика для создания узлов
@@ -26,6 +30,12 @@ public class CreateGraphFromPajek {
     PajekNetReader pajekNetReader = new PajekNetReader(vertexFactory, edgeFactory);
 
     // Загрузка графа из файла Pajek
+
+    /**
+     *
+     * @param fileAddress
+     * @return
+     */
     public Graph LoadPajek(String fileAddress) {
         try {            
             pajekNetReader.load(fileAddress, graph);

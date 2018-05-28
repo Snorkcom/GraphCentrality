@@ -19,6 +19,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class JsonMappers {
         
     // Функция преобразования ArrayList<String[]> в JSON строку
+
+    /**
+     *
+     * @param rankList
+     * @return
+     */
     public static String toJson(ArrayList<String[]> rankList) {
 
         try {

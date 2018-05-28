@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ *
+ * @author Morris
+ */
 @WebServlet(name = "getJsonGraph", urlPatterns = {"/getJsonGraph"})
 public class getJsonGraph extends HttpServlet {
 

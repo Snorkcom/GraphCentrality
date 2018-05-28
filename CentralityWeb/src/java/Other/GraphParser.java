@@ -27,6 +27,11 @@ public class GraphParser {
     ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] исход узел, [2] конечн узел, [1] др. информация
 
     // Конструктор открывает сохраненный файл и парсит его на formatVertString и formatEdgeString 
+
+    /**
+     *
+     * @throws IOException
+     */
     public GraphParser() throws IOException {
 
         String[] splitStrings; // массив разделенных строк
@@ -75,11 +80,21 @@ public class GraphParser {
     }
 
     // Возвращает ArrayList<String[]> вершин
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<String[]> VerticesJson() {
         return formatVertString;
     }
 
     // Возвращает ArrayList<String[]> ребер
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<String[]> EdgesJson() {
         return formatEdgeString;
     }
