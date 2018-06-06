@@ -8,7 +8,6 @@ import edu.uci.ics.jung.algorithms.scoring.EigenvectorCentrality;
 import edu.uci.ics.jung.algorithms.scoring.HITS;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.Graph;
-import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -24,8 +23,7 @@ public class Centrality {
     Graph graph; // исследуемый граф
     HashMap<Integer, Double> mapVertexCentr; // HashMap для вершин и их центральностей
     Map<Integer, Double> sortMap; // Сортированный HashMap
-    int vertexCount; // количество вершин в графе
-    DecimalFormat decDormat;
+    int vertexCount; // количество вершин в графе    
 
     double forNormalized; // для нормализации значений
 

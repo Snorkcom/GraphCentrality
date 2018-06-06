@@ -26,7 +26,6 @@ class createVivaGraph {
             });
         };
 
-
         // Вершины
         var x = data[0];
         var z = JSON.parse(x);
@@ -61,7 +60,7 @@ class createVivaGraph {
 
         graphics.node(function (node) {
             var ui = Viva.Graph.svg('g');
-            var svgText = Viva.Graph.svg('text').attr('y', '-4px').attr('x',
+            var svgText = Viva.Graph.svg('text').attr('y', '-13px').attr('x',
                     '-' + (nodeSize) + 'px');//.text(node.data); - всегда отображать названия
             var img = Viva.Graph.svg('rect')
                     .attr('width', nodeSize / 2)

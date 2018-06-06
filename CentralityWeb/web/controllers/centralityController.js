@@ -12,22 +12,11 @@ class centralityController {
         $('rect').attr('width', size / 2)
                 .attr('height', size / 2)
                 .attr('fill', '#2f75a8') // стандартный цвет - красный
-                .attr('stroke', "None"); // без обводки
+                .attr('stroke', "None") // без обводки
+                .attr('transform', 'translate(0,0)');
     }
 
-    // Отобразить ранги текстом
-    getRanksToString(algr) {        
-        var data = JSON.parse(this.getData(algr));
-        var res = "", x;
-        for (let i = 0; i < data.length; i++) {
-            x = data[i];
-            res += "<p> Ранг: " + x[0] + " ID: " + x[1] + " Значение: " + x[2] + "</p>";
-        }
-        var element = document.getElementById("nameOfAlg");        
-        element.innerHTML = this.nameAlg(algr);        
-        element = document.getElementById("ranks");
-        element.innerHTML = res;
-    }
+   
 
     // Отоюражение вершин по рангам на графе
     calculateCentrality(alg, n) {
@@ -54,8 +43,21 @@ class centralityController {
                     .attr('height', this.clamp(parseInt(nodeSize, 10) + 4 - i, nodeSize))
                     .attr('opacity', 0.93)
                     .attr('stroke', "black")
-                    .attr('stroke-width', '0.3%');
+                    .attr('stroke-width', '0.3%')
+                    .attr('transform', 'translate(' + (nodeSize / 2-16)
+                            + ',' + (nodeSize / 2-20) + ')');
         }
+        
+        
+        var res = "", h;
+        for (let i = 0; i < data.length; i++) {
+            h = data[i];
+            res += "<p> Ранг: " + h[0] + " ID: " + h[1] + " Значение: " + h[2] + "</p>";
+        }
+        var element = document.getElementById("nameOfAlg");        
+        element.innerHTML = this.nameAlg(alg);        
+        element = document.getElementById("ranks");
+        element.innerHTML = res;
         
     }
 

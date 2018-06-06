@@ -19,10 +19,9 @@ import java.util.ArrayList;
  */
 public class GraphParser {
 
-    String jsonGraph = "";
     int numberOfVertices; // количество вершин графа(в .net файле на 1 строке: "*Vertices 1419")
     File file = null; // для открытия файла
-    BufferedReader br; // для чтения файла
+    
     ArrayList<String[]> formatVertString = null; // Лист вершин графа <String массива>: [1] номер узла, [2] название, [1] др. информация
     ArrayList<String[]> formatEdgeString = null; // Лист ребер графа <String массива>: [1] исход узел, [2] конечн узел, [1] др. информация
 
@@ -35,6 +34,7 @@ public class GraphParser {
     public GraphParser() throws IOException {
 
         String[] splitStrings; // массив разделенных строк
+        BufferedReader br = null; // для чтения файла
 
         try {
 
@@ -44,7 +44,7 @@ public class GraphParser {
 
             // парсинг числа узлов в строке (*Vertices 132)
             String[] splitted1 = br.readLine().split(" ");
-            numberOfVertices = Integer.parseInt(splitted1[1]);
+            numberOfVertices = Integer.parseInt(splitted1[1]); // получение количества вершин
             System.out.println("Graph has " + numberOfVertices + " vertices");
 
             // Часть I: Парсинг вершин
@@ -52,10 +52,13 @@ public class GraphParser {
             formatVertString = new ArrayList<String[]>();
 
             for (int i = 0; i < numberOfVertices; i++) {
-                splitStrings = br.readLine().split("\"", 3); // разделения по ковычкам "
+                splitStrings = br.readLine().split("\"", 3); // разделения по ковычкам "                
                 splitStrings[0] = splitStrings[0].replace(" ", ""); // убирает пробел в 1 элементе
+                
+                if(splitStrings[2].length() > 1)
                 splitStrings[2] = splitStrings[2].substring(1); // убирает начальный пробел
-                formatVertString.add(splitStrings);
+               
+                formatVertString.add(splitStrings);                
             }
 
             // Часть II: Парсинг ребер
