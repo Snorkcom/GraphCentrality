@@ -54,8 +54,7 @@ public class UploadFile extends HttpServlet {
 
             int c;
             while ((c = in.read()) != -1) {               
-                out.write((char) c);
-                System.out.println((char) c);
+                out.write((char) c);                
             }
             
             out.flush();
