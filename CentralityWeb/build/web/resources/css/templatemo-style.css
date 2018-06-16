@@ -229,10 +229,10 @@ body {
 }
 
 .about-container .under-line {
-  width: 60px;
-  height: 3px;
-  background-color: #121212;
-  margin: 15px auto 20px auto;
+	width: 350px;
+	height: 2px;
+	background-color: #c9851f4d;
+	margin: 3px auto 20px auto;
 }
 
 .about-container p {

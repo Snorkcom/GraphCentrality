@@ -1,4 +1,4 @@
-class createVivaGraph {
+﻿class createVivaGraph {
 
     getData() {
 
@@ -31,7 +31,7 @@ class createVivaGraph {
         var z = JSON.parse(x);
 
         $.each(z, function (index, value) {
-            graph.addNode(value[0], value[1]);
+            graph.addNode(value[0], value[0]+" "+value[1]);
         });
 
         // Ребра

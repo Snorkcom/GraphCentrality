@@ -1,4 +1,4 @@
-class centralityController {
+﻿class centralityController {
 
    
     // Получает данные с сервиса getJSONRanksService
@@ -52,7 +52,7 @@ class centralityController {
         var res = "", h;
         for (let i = 0; i < data.length; i++) {
             h = data[i];
-            res += "<p> Ранг: " + h[0] + " ID: " + h[1] + " Значение: " + h[2] + "</p>";
+            res += "<p> " + h[0] + ") ID: " + h[1] +" Значение: " + h[2] + "</p>";
         }
         var element = document.getElementById("nameOfAlg");        
         element.innerHTML = this.nameAlg(alg);        

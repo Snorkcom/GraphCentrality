@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,35 +33,40 @@ public class UploadFile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
         Part part = request.getPart("file");
-
+        
         File file = null;
         InputStreamReader in = null;
-        FileOutputStream out = null;
 
         try {
 
             file = new File("network.net");
             System.out.println("Путь сохраненного файла на сервере: "+ file.getAbsolutePath().toString());
 
-            in = new InputStreamReader(part.getInputStream());
-            out = new FileOutputStream(file);
+            in = new InputStreamReader(part.getInputStream());           
+            
+           
+            OutputStreamWriter out = new OutputStreamWriter(
+                new FileOutputStream(file),
+                "UTF-8"
+            );
 
             int c;
-            while ((c = in.read()) != -1) {
+            while ((c = in.read()) != -1) {               
                 out.write((char) c);
+                System.out.println((char) c);
             }
-
+            
+            out.flush();
+            out.close();
             // путь до файла: System.out.println(myFile.getAbsolutePath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            in.close();
-            out.flush();
-            out.close();
+            in.close();            
         }
 
        

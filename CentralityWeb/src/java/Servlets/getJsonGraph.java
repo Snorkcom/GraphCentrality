@@ -34,9 +34,9 @@ public class getJsonGraph extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
           GraphParser graphParser = new GraphParser();
           
-          //rankList);
+          
           String graph =  JsonMappers.toJson(graphParser.VerticesJson())+"|"+JsonMappers.toJson(graphParser.EdgesJson());
-            
+         
           out.println(graph);
         }
     }
@@ -77,7 +77,7 @@ public class getJsonGraph extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "get graph like json string";
     }// </editor-fold>
 
 }

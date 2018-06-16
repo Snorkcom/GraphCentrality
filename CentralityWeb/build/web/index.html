@@ -17,13 +17,13 @@
         <link rel="stylesheet" href="resources/css/easy-responsive-tabs.min.css">
         <link rel="stylesheet" href="resources/css/tabs.css">
         <link rel="stylesheet" href="resources/css/templatemo-style.css">
-         <!-- Fonts  -->
+        <!-- Fonts  -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-       
+
         <!-- Scripts  -->
         <script src="resources/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="resources/js/jquery.min.js"></script>
-        
+
     </head>
     <body>       
         <!-- Laoding page  -->
@@ -43,8 +43,6 @@
                 <div class="row">
 
                     <div class="col-md-12">
-
-                        <a href="index.html"><div class="responsive-logo hidden-lg hidden-md hidden-sm"><img src="resources/images/logo.png"></div></a>
 
                         <!-- Begin .HorizontalTab -->
                         <div class="VerticalTab VerticalTab_hash_scroll VerticalTab_6 tabs_ver_6">
@@ -68,7 +66,7 @@
                                                     <div class="left-line"></div>  
                                                     <h2><em>Анализ важности узлов </em></h2>
                                                     <p>Выпускная квалификационная работа студента ОмГТУ специальности "Системный анализ и Управление" <em>Баскова М.М.</em></p>
-                                                 </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="right-content">
@@ -85,10 +83,13 @@
                                     <div class="about-container">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h2> <em>Задача</em></h2>
+                                                <h2> <em>Назначение программы</em></h2>
                                                 <div class="under-line"></div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc purus ligula, ullamcorper id velit id, vestibulum auctor sapien. Sed quis mauris eget sem <em>imperdiet rhoncus hendrerit</em> sed neque.<br><br>Praesent dictum at erat <em>consectetur imperdiet</em>. Vivamus lobortis eros quis elementum egestas. Fusce sed lorem sed tellus convallis pulvinar non eget erat. Nunc sapien mauris, molestie sed interdum vel, pharetra et metus.</p>
-                                                <img src="resources/images/about-image.jpg">
+                                                <p align="left"><b>Программа позволяет: </b></p>
+                                                <p align="left">1) загрузить граф с пользователями социальной сети в формате .net и отобразить его визуально;
+                                                    <br>2) рассчитать их центральность. Доступны 6 мер: <i>центральность по степени связности, центральность по близости, центральность по посредничеству, центральность по собственному вектору, PageRank, HITS </i>.
+                                                    <br>3) отобразить полученные значения центральности на графе, либо ранжированным списком.</p>
+                                                <img src="resources/images/about-image.png">
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +107,7 @@
                                                     <p> Для загрузки требуются <em>.net</em> файлы. Слева изображен пример.</p>
                                                     <center><form action="UploadFile" method="POST" enctype="multipart/form-data">
                                                             <input name="file" type="file" accept=".net"><br>
-                                                            <input name="submit" type="submit" value="Load"><br>
+                                                            <input name="submit" type="submit" value="Загрузить"><br>
                                                         </form> 
                                                     </center>                         
                                                 </div>
@@ -122,42 +123,97 @@
 
                                 </div>
 
-                                <div class="fc-tab-4">
+                                <div class="fc-tab-3">
 
-                                    <div class="contact-container">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="contact-form">
-                                                    <div class="heading">
-                                                        <h2>Say Hello</h2>
+                                    <div class="owl-carousel owl-theme projects-container">
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>Центральность по степени связности</h4>
+                                                            <a href="resources/images/theory1.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
                                                     </div>
-                                                    <form id="contact" action="" method="post">
-                                                        <fieldset>
-                                                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <input name="email" type="email" class="form-control" id="email" placeholder="Email" required="">
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message" required=""></textarea>
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <button type="submit" id="form-submit" class="btn">Submit</button>
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="more-info">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc purus ligula, ullamcorper id velit id, vestibulum auctor sapien. Sed quis mauris eget sem <em>imperdiet rhoncus hendrerit</em> sed neque.<br><br>Praesent dictum at erat <em>consectetur imperdiet</em>. Vivamus lobortis eros quis elementum egestas. Fusce sed lorem sed tellus convallis pulvinar non eget erat. Nunc sapien mauris, molestie sed interdum vel, pharetra et metus.<br><br><em>1142 Bee Street<br>Grand Rapids, MI 49503</em></p>
+                                                    <img src="resources/images/item1.jpg">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>центральность по близости</h4>
+                                                            <a href="resources/images/theory2.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="resources/images/item2.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>Центральность по посредничеству</h4>
+                                                            <a href="resources/images/theory3.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="resources/images/item3.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>Центральность по собственному вектору</h4>
+                                                            <a href="resources/images/theory4.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="resources/images/item4.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>PageRank</h4>
+                                                            <a href="resources/images/theory5.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="resources/images/item5.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="project-item">
+                                                <div class="thumb-holder">
+                                                    <div class="hover-effect">
+                                                        <div class="hover-content">
+                                                            <h4>HITS</h4>
+                                                            <a href="resources/images/theory6.png" data-lightbox="image-1"><img src="resources/images/project-icon.png"></a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="resources/images/item6.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
                                     </div>
-
+                                    
                                 </div>
 
 
+                                
+                                
                             </div>
                         </div>
                         <!-- End .HorizontalTab -->
@@ -171,15 +227,15 @@
         </section>
         <!-- End HorizontalTab style 6 -->
 
-    
-    <!--   
-    
-    <script src="resources/js/bootstrap.min.js"></script>
-    -->
-    <script src="resources/js/jquery.nicescroll.min.js"></script>
-    <script src="resources/js/plugins.js"></script>
-    <script src="resources/js/main.js"></script>    
-    <script src="resources/js/easyResponsiveTabs.js"></script>
 
-</body>
+        <!--   
+        
+        <script src="resources/js/bootstrap.min.js"></script>
+        -->
+        <script src="resources/js/jquery.nicescroll.min.js"></script>
+        <script src="resources/js/plugins.js"></script>
+        <script src="resources/js/main.js"></script>    
+        <script src="resources/js/easyResponsiveTabs.js"></script>
+
+    </body>
 </html>

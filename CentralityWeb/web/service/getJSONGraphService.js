@@ -1,4 +1,4 @@
-class getJSONGraphService {
+﻿class getJSONGraphService {
 
     
     getJSONGraph() {

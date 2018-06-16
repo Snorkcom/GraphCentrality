@@ -52,12 +52,12 @@ public class GraphParser {
             formatVertString = new ArrayList<String[]>();
 
             for (int i = 0; i < numberOfVertices; i++) {
-                splitStrings = br.readLine().split("\"", 3); // разделения по ковычкам "                
+                splitStrings = br.readLine().split("\"", 3); // разделения по ковычкам "                 
                 splitStrings[0] = splitStrings[0].replace(" ", ""); // убирает пробел в 1 элементе
                 
                 if(splitStrings[2].length() > 1)
                 splitStrings[2] = splitStrings[2].substring(1); // убирает начальный пробел
-               
+                
                 formatVertString.add(splitStrings);                
             }
 

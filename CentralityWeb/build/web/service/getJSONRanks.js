@@ -1,4 +1,4 @@
-class getJSONRanksService {
+﻿class getJSONRanksService {
 
     
     getJSONRanks(x) {

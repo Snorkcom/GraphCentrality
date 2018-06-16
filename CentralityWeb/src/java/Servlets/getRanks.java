@@ -112,7 +112,7 @@ public class getRanks extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "get centrality ranks like json string";
     }// </editor-fold>
 
 }
